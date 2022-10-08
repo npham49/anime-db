@@ -223,22 +223,25 @@ const ani1 ={
 const App=()=> {
   const[animes,setAnimes] = useState([]);
   const[searchTerm,setSearchTerm] = useState('');
+  const[currentPage,setCurrentPage] = useState(1);
 
 
-  const searchAnime = async (search) => {
-      const response = await fetch(`${API_URL}/anime?filter[text]=${search}`);
+  const searchAnime = async (search,offset) => {
+      const response = await fetch(`${API_URL}/anime?filter[text]=${search}?page[limit]=10&page[offset]=${offset*10}`);
       const data = await response.json();
-
-      setAnimes(data.data);
+      setAnimes([]);
+      setTimeout(() => {
+        setAnimes(data.data);
+      }, 300);
       console.log(animes.length);
   }
 
 
 
   useEffect(()=>{
-    searchAnime('');
+    searchAnime(searchTerm,currentPage-1);
 
-  }, []);
+  }, [currentPage]);
 
   return (
     <div className="App">
@@ -254,7 +257,7 @@ const App=()=> {
         />
         <div 
           class="search"
-          onClick={()=>searchAnime(searchTerm.replace(/ /g, '%20'))}
+          onClick={()=>{searchAnime(searchTerm.replace(/ /g, '%20'));setCurrentPage(1)}}
         >
           <img
             src={SearchIcon}
@@ -276,6 +279,21 @@ const App=()=> {
           </div>
         )
       }
+      <div className='chage-page'>
+        {
+            currentPage<2 
+        ? (
+            null
+            ):(
+            <button onClick={()=>setCurrentPage(currentPage-1)}>Prev</button>
+            )
+        }
+        
+            <p>{currentPage}</p>
+        <button
+            onClick={()=>setCurrentPage(currentPage+1)}
+        >Next</button>
+      </div>
       
 
     </div>
