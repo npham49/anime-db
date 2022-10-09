@@ -3,7 +3,7 @@ import dateFormat from "dateformat";
 
 const AnimeCard = ({anime}) => {
     return (
-        <div className='movie'>
+        <div className='anime'>
           <div>
             <h2>{anime.attributes.canonicalTitle}</h2>
           </div>
