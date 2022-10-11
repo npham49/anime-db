@@ -5,7 +5,7 @@ import './App.css';
 import './assets/searchbar.scss'
 
 
-const API_URL = 'https://kitsu.io/api/edge'
+const API_URL = 'https://cors-anywhere.herokuapp.com/api.myanimelist.net:443/v2'
 
 
 const App=()=> {
@@ -14,8 +14,15 @@ const App=()=> {
   const[currentPage,setCurrentPage] = useState(1);
 
 
+
+
   const searchAnime = async (search,offset) => {
-      const response = await fetch(`${API_URL}/anime?filter[text]=${search}?page[limit]=10&page[offset]=${offset*10}`);
+      const request = {
+          headers : { 'X-MAL-CLIENT-ID': '6af09f05489e863c3832e5a001faa39f'},
+          
+          
+      };
+      const response = await fetch(`${API_URL}/anime?q=${search}&limit=10&offset=${offset*10}`,request);
       const data = await response.json();
       setAnimes([]);
       setTimeout(() => {
