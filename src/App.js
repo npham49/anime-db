@@ -18,7 +18,7 @@ const App=()=> {
 
 
   const searchAnime = async (search) => {
-      const response = await fetch(`https://api.jikan.moe/v4/anime?q=${search}&limit=10&page=${currentPage}`);
+      const response = await fetch(`${API_URL}/anime?q=${search}&limit=10&page=${currentPage}`);
       const data = await response.json();
       setAnimes([])
       setAnimes([data.data]);
