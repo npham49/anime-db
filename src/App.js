@@ -4,30 +4,29 @@ import SearchIcon from './icons/search.svg'
 import './App.css';
 import './assets/searchbar.scss'
 
-
-const API_URL = 'https://kitsu.io/api/edge'
+//We have to go through a thrid party link because MAL API still has not fixed the CORS bug
+const API_URL = 'https://api.jikan.moe/v4'
 
 
 const App=()=> {
   const[animes,setAnimes] = useState([]);
   const[searchTerm,setSearchTerm] = useState('');
   const[currentPage,setCurrentPage] = useState(1);
+  const[hasNextPage,setHasNextPage] = useState(false);
 
 
-  const searchAnime = async (search,offset) => {
-      const response = await fetch(`${API_URL}/anime?filter[text]=${search}?page[limit]=10&page[offset]=${offset*10}`);
+
+
+  const searchAnime = async (search) => {
+      const response = await fetch(`${API_URL}/anime?q=${search}&limit=10&page=${currentPage}`);
       const data = await response.json();
-      setAnimes([]);
-      setTimeout(() => {
-        setAnimes(data.data);
-      }, 300);
-      console.log(animes.length);
+      setAnimes([])
+      setAnimes([data.data]);
+      setHasNextPage(data.pagination.has_next_page);
   }
 
-
-
   useEffect(()=>{
-    searchAnime(searchTerm,currentPage-1);
+    searchAnime(searchTerm);
 
   }, [currentPage]);
 
@@ -53,12 +52,12 @@ const App=()=> {
           />
         </div>
       </div>
-
       {
-        animes ?.length>0
+        
+        animes?.length>0
         ? (
           <div className='container'>
-            {animes.map((anime)=>(
+            {animes[0].map((anime)=>(
               <AnimeCard anime={anime}/>
             ))}
           </div>
@@ -79,9 +78,18 @@ const App=()=> {
         }
         
             <p>{currentPage}</p>
-        <button
-            onClick={()=>setCurrentPage(currentPage+1)}
-        >Next</button>
+
+        {
+            hasNextPage===false 
+        ? (
+            null
+            ):(
+            
+              <button
+                onClick={()=>setCurrentPage(currentPage+1)}
+              >Next</button>
+            )
+        }
       </div>
       
 

@@ -1,20 +1,19 @@
-import React from "react";
-import dateFormat from "dateformat";
-
 const AnimeCard = ({anime}) => {
+    
     return (
         <div className='anime'>
+          {console.log(anime.title)}
           <div>
-            <h2>{anime.attributes.canonicalTitle}</h2>
+            <h2>{anime.title}</h2>
           </div>
 
           <div>
-            <img src={anime.attributes.posterImage.original} alt={anime.attributes.canonicalTitle}/>
+            <img src={anime.images.webp.image_url} alt={anime.title}/>
           </div>
 
-          <span>{anime.attributes.showType}</span>
+          <span>{anime.type}</span>
           <br></br>
-          <span>{dateFormat(anime.attributes.endDate,"mmmm dS, yyyy")}</span>
+          <span>{anime.aired.string}</span>
         </div>
     )
 
