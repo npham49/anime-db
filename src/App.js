@@ -18,10 +18,11 @@ const App=()=> {
 
 
   const searchAnime = async (search) => {
-      const response = await fetch(`${API_URL}/anime?q=${search}&limit=10&page=${currentPage}`);
+      const response = await fetch(`${API_URL}/anime?q=${search}&limit=10&page=${currentPage}&genre='12'`);
       const data = await response.json();
       setAnimes([])
       setAnimes([data.data]);
+      console.log(data.data[0]);
       setHasNextPage(data.pagination.has_next_page);
   }
 
@@ -31,7 +32,7 @@ const App=()=> {
   }, [currentPage]);
 
   return (
-    <div className="App">
+    <div className="App place-content-center text-textcolor flex flex-col justify-center items-center">
       <h1>Anime DB</h1>
 
       <div class="s-container">
@@ -48,32 +49,34 @@ const App=()=> {
           onClick={()=>{searchAnime(searchTerm.replace(/ /g, '%20'));setCurrentPage(1)}}
         >
           <img
-            src={SearchIcon}
+            src={SearchIcon} alt="Search Icon"
           />
         </div>
       </div>
-      {
-        
-        animes?.length>0
-        ? (
-          <div className='container'>
-            {animes[0].map((anime)=>(
-              <AnimeCard anime={anime}/>
-            ))}
-          </div>
-        ) : (
-          <div className='empty'> 
-            <h2>No search results.</h2>
-          </div>
-        )
-      }
-      <div className='chage-page'>
+      <div className='container px-5 py-2 mx-auto justify-center'>
+        {
+          
+          animes?.length>0
+          ? (
+            <div className='justify-center items-center flex flex-wrap -m-1 md:-m-2'>
+              {animes[0].map((anime)=>(
+                <AnimeCard anime={anime}/>
+              ))}
+            </div>
+          ) : (
+            <div className='empty'> 
+              <h2>No search results.</h2>
+            </div>
+          )
+        }
+      </div>
+      <div className='inline-flex shadow-md hover:shadow-lg focus:shadow-lg'>
         {
             currentPage<2 
         ? (
             null
             ):(
-            <button onClick={()=>setCurrentPage(currentPage-1)}>Prev</button>
+            <button className='rounded-l inline-block px-6 py-2.5 bg-slate-600 text-textcolor font-medium text-xs leading-tight uppercase hover:bg-slate-700 focus:bg-slate-700 focus:outline-none focus:ring-0 active:bg-slate-800 transition duration-150 ease-in-out' onClick={()=>setCurrentPage(currentPage-1)}>Prev</button>
             )
         }
         
@@ -86,6 +89,7 @@ const App=()=> {
             ):(
             
               <button
+                className='rounded-l inline-block px-6 py-2.5 bg-slate-600 text-textcolor font-medium text-xs leading-tight uppercase hover:bg-slate-700 focus:bg-slate-700 focus:outline-none focus:ring-0 active:bg-slate-800 transition duration-150 ease-in-out'
                 onClick={()=>setCurrentPage(currentPage+1)}
               >Next</button>
             )
