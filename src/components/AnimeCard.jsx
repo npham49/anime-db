@@ -1,7 +1,7 @@
 const AnimeCard = ({anime}) => {
     
     return (
-        <div className='flex flex-col bg-cardbg w-64 justify-center items-center p-2 m-4 rounded-lg'>
+        <div className='flex flex-col bg-cardbg hover:bg-cardbghover w-64 justify-center items-center p-2 m-4 rounded-lg'>
           {console.log(anime.title)}
           <div>
             <img src={anime.images.webp.image_url} alt={anime.title}/>

@@ -32,7 +32,7 @@ const App=()=> {
   }, [currentPage]);
 
   return (
-    <div className="App place-content-center text-textcolor flex flex-col justify-center items-center">
+    <div className="place-content-center text-textcolor flex flex-col justify-center items-center">
       <h1>Anime DB</h1>
 
       <div class="s-container">
@@ -70,17 +70,21 @@ const App=()=> {
           )
         }
       </div>
-      <div className='inline-flex shadow-md hover:shadow-lg focus:shadow-lg'>
+      <div className='inline-flex'>
         {
             currentPage<2 
         ? (
             null
             ):(
-            <button className='rounded-l inline-block px-6 py-2.5 bg-slate-600 text-textcolor font-medium text-xs leading-tight uppercase hover:bg-slate-700 focus:bg-slate-700 focus:outline-none focus:ring-0 active:bg-slate-800 transition duration-150 ease-in-out' onClick={()=>setCurrentPage(currentPage-1)}>Prev</button>
+            <button 
+            className='bg-cardbg hover:bg-cardbghover text-textcolor font-bold py-2 px-4 rounded-l' 
+            onClick={()=>setCurrentPage(currentPage-1)}>Prev</button>
             )
         }
         
-            <p>{currentPage}</p>
+            <div className='bg-cardbg text-textcolor font-bold py-2 px-4 border-r border-l border-bgcolor'>
+              <p>{currentPage}</p>
+            </div>
 
         {
             hasNextPage===false 
@@ -89,7 +93,7 @@ const App=()=> {
             ):(
             
               <button
-                className='rounded-l inline-block px-6 py-2.5 bg-slate-600 text-textcolor font-medium text-xs leading-tight uppercase hover:bg-slate-700 focus:bg-slate-700 focus:outline-none focus:ring-0 active:bg-slate-800 transition duration-150 ease-in-out'
+                className='bg-cardbg hover:bg-cardbghover text-textcolor font-bold py-2 px-4 rounded-r'
                 onClick={()=>setCurrentPage(currentPage+1)}
               >Next</button>
             )
