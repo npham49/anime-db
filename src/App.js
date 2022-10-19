@@ -4,7 +4,6 @@ import SearchIcon from './icons/search.svg'
 import './App.css';
 import './assets/searchbar.scss'
 
-//We have to go through a thrid party link because MAL API still has not fixed the CORS bug
 const API_URL = 'https://api.jikan.moe/v4'
 
 
