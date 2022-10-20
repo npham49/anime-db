@@ -17,7 +17,7 @@ const App=()=> {
 
 
   const searchAnime = async (search) => {
-      const response = await fetch(`${API_URL}/anime?q=${search}&limit=10&page=${currentPage}&genre='12'`);
+      const response = await fetch(`${API_URL}/anime?q=${search}&limit=10&page=${currentPage}`);
       const data = await response.json();
       setAnimes([])
       setAnimes([data.data]);
