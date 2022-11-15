@@ -8,11 +8,11 @@ const AnimeCard = ({anime}) => {
   const [open, setOpen] = useState(false);
   const closeModal = () => setOpen(false);
     return (
-        <div onClick={() => setOpen(o => !o)} className='flex flex-col bg-cardbg hover:bg-cardbghover drop-shadow-md w-64 justify-center items-center m-4 rounded-lg cursor-pointer'>
+        <div onClick={() => setOpen(o => !o)} className='flex flex-col bg-gray-800 border border-gray-700 hover:bg-gray-700 shadow-md w-64 justify-center items-center m-4 rounded-lg cursor-pointer'>
           {/* the popup */}
           <Popup open={open} closeOnDocumentClick onClose={closeModal}>
             <div>
-              <div className='flex justify-between items-start rounded-t border-b dark:border-gray-600'>
+              <div className='flex justify-between items-start'>
                 <h3 class="text-xl font-semibold text-gray-900">
                   Info
                 </h3>
@@ -20,7 +20,7 @@ const AnimeCard = ({anime}) => {
                   <p className='w-6 h-6'>&times;</p>
                 </button>
               </div>
-              <div className='h-2/3 overflow-y-auto p-6 bg-bgcolor text-textcolor'>
+              <div className='h-2/3 overflow-y-auto p-6 bg-gray-800 text-white'>
                 <p><b>Japanese tittle:</b> {anime.title_japanese} ({anime.title} ) </p>
                 <p><b>English tittle:</b> {anime.title_english}</p>
                 <h4><b>Description:</b></h4>
@@ -29,7 +29,7 @@ const AnimeCard = ({anime}) => {
                 {anime.trailer.embed_url ? 
                   <Iframe url={anime.trailer.embed_url}
                   width="100%"
-                  height="320px"
+                  height="360px"
                   display="block"
                   position="relative"/>
                    : <p>Unavailable</p>}
