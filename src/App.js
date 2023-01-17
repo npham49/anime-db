@@ -79,7 +79,7 @@ const App = () => {
             className="bg-gray-800 hover:bg-gray-700 text-textcolor font-bold py-2 px-4 rounded-l"
             onClick={() => setCurrentPage(currentPage - 1)}
           >
-            Prev
+            Previous
           </button>
         )}
 
